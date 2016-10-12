@@ -1,0 +1,97 @@
+Script started on Mon 10 Oct 2016 07:57:15 PM PDT
+[wallerz@athena:21]> cat lab4.[K[K3.c
+/*-------------------------------------------------*/
+/* Zack Waller                                     */
+/* Lab 3                                           */
+/* Figure the perimeter and area of a polygon      */
+/* surrounded by a circle                          */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define IN_FILE "/gaia/class/student/wallerz/c/lab3/lab3.dat"
+#define OUT_FILE "/gaia/class/student/wallerz/c/lab3/lab3.txt"
+
+//function prototypes
+double calcArea(double,double);
+double calcPerimeter(double,double);
+void writeHeaders(FILE *writefile);
+void writeLine(FILE *writefile, double, double, double, double);
+
+int main(void)
+{
+    
+    FILE *readfile;
+    FILE *writefile;
+    readfile = fopen(IN_FILE, "r");
+    if (readfile == NULL)
+    {
+        printf("Error opening readfile.\n\n");
+    }
+    else
+    {
+        writefile = fopen(OUT_FILE, "w+");
+        if (writefile == NULL)
+        {
+            printf("Error opening output file.\n\n");
+        }
+        else
+        {
+            writeHeaders(writefile);
+            double radius, sides;
+            
+            while (fscanf(readfile,"%lf %lf",&radius,&sides )!= EOF)
+            {
+                //Do calcs then write.
+                double perimeter = calcPerimeter(sides,radius);
+                double area = calcArea(sides,radius);
+                writeLine(writefile, radius, sides, perimeter, area);
+            }
+            fclose(writefile);
+        }
+        
+        fclose(readfile);
+    }
+    
+    return EXIT_SUCCESS;
+}
+
+double calcArea(double n_sides, double radius)
+{
+    return 0.5 * n_sides * pow(radius,2.0) * sin((2.0*M_PI)/n_sides);
+}
+double calcPerimeter(double n_sides, double radius)
+{
+    return 2.0*n_sides*radius*(sin(M_PI/n_sides));
+}
+void writeHeaders(FILE *writefile)
+{
+    fprintf(writefile, "\nZack Waller.  Lab 3.\n\n");
+    fprintf(writefile, "            Number      Perimeter      Area Of  \n");
+    fprintf(writefile, " Radius    Of Sides    Of Polygon      Polygon  \n");
+    fprintf(writefile, "--------   --------   ------------   ----------- \n");
+}
+
+void writeLine(FILE *writefile, double radius, double sides, double perimeter, double area)
+{
+    fprintf(writefile, "%8.2f %10.2f %14.4f %13.4f\n",radius,sides,perimeter,area);
+}
+[wallerz@athena:22]> a.out
+[wallerz@athena:23]> cat lab4[K3.5x[K[Ktxt
+
+Zack Waller.  Lab 3.
+
+            Number      Perimeter      Area Of  
+ Radius    Of Sides    Of Polygon      Polygon  
+--------   --------   ------------   ----------- 
+    4.20       6.00        25.2000       45.8301
+    3.10       4.00        17.5362       19.2200
+   10.50      10.00        64.8936      324.0166
+   23.00       8.00       140.8275     1496.2379
+    9.70       4.00        54.8715      188.1800
+   15.90       5.00        93.4579      601.0915
+[wallerz@athena:24]> exit
+exit
+
+Script done on Mon 10 Oct 2016 07:57:52 PM PDT

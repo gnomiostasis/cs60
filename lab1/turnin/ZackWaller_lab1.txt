@@ -1,0 +1,31 @@
+Script started on Fri 09 Sep 2016 10:42:54 AM PDT
+[wallerz@athena:17]> cat lab1.c
+/*
+    Zack Waller
+    Section: MWF 11am
+    Lab1
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    printf("Lab 1\n\n");
+    printf("Hello, Zack Waller\n\n");
+    printf("If it doesn't make dollars it doesn't makes sense. Dolla dolla billz, ya\'ll.\n");
+    printf("-Abraham Lincoln\n\n");
+    return EXIT_SUCCESS;
+}
+[wallerz@athena:18]> a.out
+Lab 1
+
+Hello, Zack Waller
+
+If it doesn't make dollars it doesn't makes sense. Dolla dolla billz, ya'll.
+-Abraham Lincoln
+
+[wallerz@athena:19]> exit
+exit
+
+Script done on Fri 09 Sep 2016 10:43:09 AM PDT

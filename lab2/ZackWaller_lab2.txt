@@ -1,0 +1,262 @@
+Script started on Wed 28 Sep 2016 11:12:03 AM PDT
+[wallerz@atoz:20]> pwd
+/gaia/class/student/wallerz
+[wallerz@atoz:21]> mkdir xyz
+[wallerz@atoz:22]> cd xyz
+[wallerz@atoz:23]> pwd
+/gaia/class/student/wallerz/xyz
+[wallerz@atoz:24]> cd ..
+[wallerz@atoz:25]> ls
+c/  html/  xyz/  ZackWaller_lab2.txt
+[wallerz@atoz:26]> pwd
+/gaia/class/student/wallerz
+[wallerz@atoz:27]> ls > file1
+[wallerz@atoz:28]> cat file1
+c/
+file1
+html/
+xyz/
+ZackWaller_lab2.txt
+[wallerz@atoz:29]> less fil1[Ke1
+[?1049h[?1h=c/
+file1
+html/
+xyz/
+ZackWaller_lab2.txt
+[7mfile1 (END) [27m[K[K[?1l>[?1049l[wallerz@atoz:30]> file *
+c:                   setgid directory
+file1:               ASCII text
+html:                setgid directory
+xyz:                 setgid directory
+ZackWaller_lab2.txt: empty
+[wallerz@atoz:31]> c[Kc[Kwc file1
+ 5  5 40 file1
+[wallerz@atoz:32]> wv[Kc *
+wc: c: Is a directory
+      0       0       0 c
+      5       5      40 file1
+wc: html: Is a directory
+      0       0       0 html
+wc: xyz: Is a directory
+      0       0       0 xyz
+      0       0       0 ZackWaller_lab2.txt
+      5       5      40 total
+[wallerz@atoz:33]> grep lab file1
+ZackWaller_lab2.txt
+[wallerz@atoz:34]> cp file1 file2
+[wallerz@atoz:35]> ls
+c/  file1  file2  html/  xyz/  ZackWaller_lab2.txt
+[wallerz@atoz:36]> cd xyz
+[wallerz@atoz:37]> cp //.[K[K[K../file1
+cp: missing destination file operand after `../file1'
+Try `cp --help' for more information.
+[wallerz@atoz:38]> ls
+[wallerz@atoz:39]> cp[K[Kcd ..
+[wallerz@atoz:40]> ls
+c/  file1  file2  html/  xyz/  ZackWaller_lab2.txt
+[wallerz@atoz:41]> cp file1
+cp: missing destination file operand after `file1'
+Try `cp --help' for more information.
+[wallerz@atoz:42]> cd xyz
+[wallerz@atoz:43]> ls
+[wallerz@atoz:44]> clear
+[H[2J[wallerz@atoz:45]> cp ../fil1 [Ke1 file1
+[wallerz@atoz:46]> ls
+file1
+[wallerz@atoz:47]> ls
+file1
+[wallerz@atoz:48]> mv file1 file 2[K2
+[wallerz@atoz:49]> ls
+file2
+[wallerz@atoz:50]> mv file[K[K[K[K../file1 
+mv: missing destination file operand after `../file1'
+Try `mv --help' for more information.
+[wallerz@atoz:51]> mv ../file1 file1
+[wallerz@atoz:52]> ls
+file1  file2
+[wallerz@atoz:53]> cmp file1 file2
+[wallerz@atoz:54]> ls > xyzlist
+[wallerz@atoz:55]> cmp file1 xyzlist
+file1 xyzlist differ: byte 1, line 1
+[wallerz@atoz:56]> diff file xyzlist
+diff: file: No such file or directory
+[wallerz@atoz:57]> diff file xyzlist[1@1
+1d0
+< c/
+3,5c2,3
+< html/
+< xyz/
+< ZackWaller_lab2.txt
+---
+> file2
+> xyzlist
+[wallerz@atoz:58]> rm file1
+[wallerz@atoz:59]> w
+ 11:17:21 up 6 days, 20:20,  3 users,  load average: 0.12, 0.03, 0.01
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+priesten pts/0    athena.ecs.csus. 11:04    7:07   0.11s  0.11s -csh
+wallerz  pts/3    athena.ecs.csus. 11:09    0.00s  0.14s  0.01s script ZackWall
+wallerz  pts/4    -                11:12    0.00s  0.14s  0.02s w
+[wallerz@atoz:60]> who
+priesten pts/0        2016-09-28 11:04 (athena.ecs.csus.edu)
+wallerz  pts/3        2016-09-28 11:09 (athena.ecs.csus.edu)
+wallerz  pts/4        2016-09-28 11:12
+[wallerz@atoz:61]> ps -u
+Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+wallerz  28875  0.0  0.0 116748  2016 pts/3    Ss   11:09   0:00 -csh
+wallerz  28984  0.0  0.0 107128   828 pts/3    S+   11:12   0:00 script ZackWall
+wallerz  28986  0.0  0.0 107640   404 pts/3    S+   11:12   0:00 script ZackWall
+wallerz  28987  0.0  0.0 110380  1800 pts/4    Ss   11:12   0:00 -sh -i
+wallerz  29141  2.0  0.0 114488  1292 pts/4    R+   11:17   0:00 ps -u
+[wallerz@atoz:62]> ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  2633 28987 28986  0  80   0 - 27595 rt_sig pts/4    00:00:00 csh
+0 R  2633 29143 28987  1  80   0 - 27035 -      pts/4    00:00:00 ps
+[wallerz@atoz:63]> !!
+ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  2633 28987 28986  0  80   0 - 27595 rt_sig pts/4    00:00:00 csh
+0 R  2633 29146 28987  1  80   0 - 27035 -      pts/4    00:00:00 ps
+[wallerz@atoz:64]> history
+     1	10:46	cd html/
+     2	10:46	rm c
+     3	10:46	rmdir d
+     4	10:46	rmdir c
+     6	10:46	mkdir c
+     7	10:47	cd c/
+     8	10:47	man g++
+     9	10:47	man g
+    10	10:47	man gcc
+    11	10:48	cls
+    12	10:54	gcc main.c -o helloworld
+    14	10:54	helloworld
+    16	11:16	vim
+    17	10:43	cat lab1.c
+    18	10:43	a.out
+    19	10:43	exit
+    21	11:12	mkdir xyz
+    26	11:12	pwd
+    27	11:12	ls > file1
+    28	11:12	cat file1
+    29	11:12	less file1
+    30	11:12	file *
+    31	11:13	wc file1
+    32	11:13	wc *
+    33	11:13	grep lab file1
+    34	11:13	cp file1 file2
+    37	11:13	cp ../file1
+    39	11:14	cd ..
+    41	11:14	cp file1
+    42	11:14	cd xyz
+    44	11:14	clear
+    45	11:15	cp ../file1 file1
+    48	11:15	mv file1 file2
+    50	11:15	mv ../file1
+    51	11:16	mv ../file1 file1
+    52	11:16	ls
+    53	11:16	cmp file1 file2
+    54	11:16	ls > xyzlist
+    55	11:16	cmp file1 xyzlist
+    56	11:16	diff file xyzlist
+    57	11:17	diff file1 xyzlist
+    58	11:17	rm file1
+    59	11:17	w
+    60	11:17	who
+    61	11:17	ps -u
+    63	11:18	ps -l
+    64	11:18	history
+[wallerz@atoz:65]> !4[K3
+rmdir d
+rmdir: failed to remove `d': No such file or directory
+[wallerz@atoz:66]> cd ..
+[wallerz@atoz:67]> ls
+c/  file2  html/  xyz/	ZackWaller_lab2.txt
+[wallerz@atoz:68]> cd c/
+[wallerz@atoz:69]> ls
+a.out*	lab1.c	ZackWaller_lab1.txt
+[wallerz@atoz:70]> had [K[Kead lab1.c
+/*
+    Zack Waller
+    Section: MWF 11am
+    Lab1
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, const char * argv[]) {
+[wallerz@atoz:71]> tail lab1.c
+#include <stdlib.h>
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    printf("Lab 1\n\n");
+    printf("Hello, Zack Waller\n\n");
+    printf("If it doesn't make dollars it doesn't makes sense. Dolla dolla billz, ya\'ll.\n");
+    printf("-Abraham Lincoln\n\n");
+    return EXIT_SUCCESS;
+}
+[wallerz@atoz:72]> las[K[K[Kls -al |le[K[K less
+[?1049h[?1h=total 24
+drwx--S--- 2 wallerz stdcsc 4096 Sep  9 10:44 ./
+drwx--s--x 8 wallerz stdcsc 4096 Sep 28 11:16 ../
+-rwx------ 1 wallerz stdcsc 4802 Sep  9 10:41 a.out*
+-rw------- 1 wallerz stdcsc  385 Sep  9 10:40 lab1.c
+-rw------- 1 wallerz stdcsc  726 Sep  9 10:44 ZackWaller_lab1.txt
+[7m(END) [27m[K[K[K[7m(END) [27m[K[K[?1l>[?1049l[wallerz@atoz:73]> history
+     1	10:46	cd html/
+     2	10:46	rm c
+     4	10:46	rmdir c
+     6	10:46	mkdir c
+     8	10:47	man g++
+     9	10:47	man g
+    10	10:47	man gcc
+    11	10:48	cls
+    12	10:54	gcc main.c -o helloworld
+    14	10:54	helloworld
+    16	11:16	vim
+    17	10:43	cat lab1.c
+    18	10:43	a.out
+    19	10:43	exit
+    21	11:12	mkdir xyz
+    26	11:12	pwd
+    27	11:12	ls > file1
+    28	11:12	cat file1
+    29	11:12	less file1
+    30	11:12	file *
+    31	11:13	wc file1
+    32	11:13	wc *
+    33	11:13	grep lab file1
+    34	11:13	cp file1 file2
+    37	11:13	cp ../file1
+    41	11:14	cp file1
+    42	11:14	cd xyz
+    44	11:14	clear
+    45	11:15	cp ../file1 file1
+    48	11:15	mv file1 file2
+    50	11:15	mv ../file1
+    51	11:16	mv ../file1 file1
+    53	11:16	cmp file1 file2
+    54	11:16	ls > xyzlist
+    55	11:16	cmp file1 xyzlist
+    56	11:16	diff file xyzlist
+    57	11:17	diff file1 xyzlist
+    58	11:17	rm file1
+    59	11:17	w
+    60	11:17	who
+    61	11:17	ps -u
+    63	11:18	ps -l
+    65	11:18	rmdir d
+    66	11:18	cd ..
+    68	11:19	cd c/
+    69	11:19	ls
+    70	11:19	head lab1.c
+    71	11:19	tail lab1.c
+    72	11:19	ls -al | less
+    73	11:19	history
+[wallerz@atoz:74]> echo ![K@[K$s[KSHELL
+/bin/csh
+[wallerz@atoz:75]> ^Dexit
+
+Script done on Wed 28 Sep 2016 11:20:56 AM PDT
