@@ -69,9 +69,17 @@ int main(void)
     else if(strcmp(argv[0],"pwd")==0)
     {
         char *path;
-        char *buffer;
+        char buffer[MAX_PATH_LENGTH ];
         path = getcwd(buffer,MAX_PATH_LENGTH);
-        printf("%s\n", path);
+        if (path!=NULL)
+        {
+            printf("%s\n", path);
+        }
+        else
+        {
+            printf("PWD failed\n");
+        }
+        
     }
     else if(strcmp(argv[0],"cd")==0)
     {
