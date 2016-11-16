@@ -1,0 +1,14 @@
+Script started on Tue 15 Nov 2016 08:31:48 PM PST
+[wallerz@sp1:21]> lab6.exe
+CSC60MSH> 
+CSC60MSH>  
+CSC60MSH> pwd
+/gaia/class/student/wallerz/c/lab6
+CSC60MSH> cd ..
+CSC60MSH> cd
+CSC60MSH> exit
+EXIT SHELL
+[wallerz@sp1:22]> exit
+exit
+
+Script done on Tue 15 Nov 2016 08:32:09 PM PST
