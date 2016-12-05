@@ -69,7 +69,7 @@ int main(void)
         else if(strcmp(argv[0],"pwd")==0)
         {
             char *path;
-            char buffer[MAX_PATH_LENGTH ];
+            char buffer[MAX_PATH_LENGTH];
             path = getcwd(buffer,MAX_PATH_LENGTH);
             if (path!=NULL)
             {
@@ -112,7 +112,7 @@ int main(void)
                     break;
                 default:
                     /* I am parent process */
-                    if (wait(&status) == -1)
+                    if (wait(&status) == -1)//&status
                         perror("Shell Program error");
                     else
                         printf("Child returned status: %d\n",status);
@@ -146,19 +146,81 @@ int parseline(char *cmdline, char **argv)
 void process_input(int argc, char **argv) {
     /* Step 1: Call handle_redir to deal with operators:            */
     /* < , or  >, or both                                           */
-    
+	handle_redir(argc, argv);
     /* Step 2: perform system call execvp to execute command        */
     /* Hint: Please be sure to review execvp.c sample program       */
-    /* if (........ == -1) {                                        */
-    /*  perror("Shell Program");                                    */
-    /*  _exit(-1);                                                  */
-    /* }                                                            */
-    
+
+
+	
+     if (execvp(argv[0],argv) == -1) {                                        
+		perror("Shell Program");                                    
+		_exit(-1);                                                  
+     }
+     else
+     {
+		_exit(0);
+     }
 }
 /* ----------------------------------------------------------------- */
 void handle_redir(int count, char *argv[])
-{
-    
+{ /* 
+     //we are gonna dup2 here
+     if (strcmp(argv[0],'<') == 0 || strcmp(argv[0],'>') == 0)
+     {
+	//err here
+     }
+     
+     int outcount = 0;
+     int incount = 0;
+   for (int i =0; i < count; i++)
+     {
+		 if (strcmp(argv[0], '<') == 0)
+		 {
+
+		 }
+		 else if(strcmp(argv[0], '>') == 0)
+		 {
+
+		 }
+     }
+	 */
+	 
+	 int i;
+	 for (i=0; i < count; i++)
+	 {
+		 if (strcmp(argv[i], "<") == 0)
+		 {
+			 //argv[i - 1];
+			 int fileId;
+
+			 fileId = open(argv[fd_out + 1], O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR, S_IWUSR);
+
+			 if (fileId < 0)
+			 {
+				 printf("error creating x.lis\n");
+				 exit(EXIT_FAILURE);
+			 }
+			 dup2(fileId, 0);      /* copy fileID to stdin */
+			 close(fileId);
+			 argv[i] = NULL;
+		 }
+		 else if (strcmp(argv[i], ">") == 0)
+		 {
+			 int fileId;
+			 fileId = creat(argv[i + 1], 0640);
+			 
+			 if (fileId < 0)
+			 {
+				 printf("error creating x.lis\n");
+				 exit(EXIT_FAILURE);
+			 }
+			 dup2(fileId, 1);      /* copy fileID to stdout */
+			 close(fileId);
+			 argv[i] = NULL;
+
+		 }
+	 }
+
 }
 /* ----------------------------------------------------------------- */
 /* ----------------------------------------------------------------- */
