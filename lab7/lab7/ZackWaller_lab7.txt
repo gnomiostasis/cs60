@@ -1,0 +1,70 @@
+Script started on Mon 05 Dec 2016 06:53:14 PM PST
+[wallerz@atoz:21]> lab7.exe
+CSC60MSH> 
+CSC60MSH>  
+CSC60MSH> pwd
+/gaia/class/student/wallerz/c/lab7
+CSC60MSH> cd ..
+CSC60MSH> cd
+CSC60MSH> ls
+c  file2  html	xyz  ZackWaller_lab2.txt
+CSC60MSH> cd /c/lab7
+CSC60MSH> ls
+execvp.c  lab7.c  lab7.exe  Note.txt  redir.c  waitpid.c  ZackWaller_lab7.txt
+CSC60MSH> ls >ls.out
+ls: cannot access >ls.out: No such file or directory
+CSC60MSH> ls > ls.out
+CSC60MSH> ls > ls.out > ls2.out
+You can't have multiple of the same type of redirect.
+: Success
+CSC60MSH> ls
+execvp.c  lab7.c  lab7.exe  ls.out  Note.txt  redir.c  waitpid.c  ZackWaller_lab7.txt
+CSC60MSH> wc < ls.out
+ 8  8 79
+CSC60MSH> wc < ls.out < redir.c
+You can't have multiple of the same type of redirect.
+: Success
+CSC60MSH> cat redir.c
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (void)
+{
+    int fileId;
+    fileId = creat( "x.lis",0640 );
+    if( fileId < 0 )  
+    {  
+	printf("error creating x.lis\n" ); 
+	exit (EXIT_FAILURE);     
+    }
+    dup2( fileId, 1);      /* copy fileID to stdout */
+    close( fileId );     		
+    execl( "/bin/ls", "ls", 0 );
+    exit (EXIT_SUCCESS);
+}
+CSC60MSH> cd /usr/bin
+CSC60MSH> cd
+CSC60MSH> /user/bin/ps
+Shell Program: No such file or directory
+CSC60MSH> ls
+c  file2  html	xyz  ZackWaller_lab2.txt
+CSC60MSH> cd /c/lab7
+CSC60MSH> ls
+execvp.c  lab7.c  lab7.exe  ls.out  Note.txt  redir.c  waitpid.c  ZackWaller_lab7.txt
+CSC60MSH> wc waitpid.c
+  46  102 1110 waitpid.c
+CSC60MSH> gcc -o redir redir.c -g
+CSC60MSH> ls
+execvp.c  lab7.exe  Note.txt  redir.c	 ZackWaller_lab7.txt
+lab7.c	  ls.out    redir     waitpid.c
+CSC60MSH> redir
+CSC60MSH> exit
+EXIT SHELL
+[wallerz@atoz:22]> ls
+execvp.c  lab7.exe*  Note.txt  redir.c	  x.lis
+lab7.c	  ls.out     redir*    waitpid.c  ZackWaller_lab7.txt
+[wallerz@atoz:23]> exit
+exit
+
+Script done on Mon 05 Dec 2016 06:59:41 PM PST

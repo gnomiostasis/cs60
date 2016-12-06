@@ -114,8 +114,8 @@ int main(void)
                     /* I am parent process */
                     if (wait(&status) == -1)//&status
                         perror("Shell Program error");
-                    else
-                        //printf("Child returned status: %d\n",status);
+					/*else
+                        printf("Child returned status: %d\n",status);*/
                     break;
             } /* end of the switch */
         }
@@ -154,36 +154,52 @@ void process_input(int argc, char **argv) {
 	
      if (execvp(argv[0],argv) == -1) {                                        
 		perror("Shell Program");                                    
-		_exit(-1);                                                  
+		_exit(EXIT_FAILURE);                                                  
      }
      else
      {
-		_exit(0);
+		_exit(EXIT_SUCCESS);
      }
 }
 /* ----------------------------------------------------------------- */
 void handle_redir(int count, char *argv[])
-{ /* 
-     //we are gonna dup2 here
-     if (strcmp(argv[0],'<') == 0 || strcmp(argv[0],'>') == 0)
-     {
-	//err here
-     }
+{  
      
-     int outcount = 0;
-     int incount = 0;
-   for (int i =0; i < count; i++)
+     if (strcmp(argv[0],"<") == 0 || strcmp(argv[0],">") == 0)
      {
-		 if (strcmp(argv[0], '<') == 0)
-		 {
-
-		 }
-		 else if(strcmp(argv[0], '>') == 0)
-		 {
-
-		 }
+		 perror("You can't start with a redirect.\n");
+		 _exit(EXIT_FAILURE);
      }
-	 */
+	 else if (strcmp(argv[count - 1], "<") == 0 || strcmp(argv[count - 1], ">") == 0)
+	 {
+		 perror("You redirect needs to reference something.\n");
+		 _exit(EXIT_FAILURE);
+	 }
+	 else
+	 {
+		 int outcount = 0;
+		 int incount = 0;
+		 int i;
+		 for (i = 0; i < count; i++)
+		 {
+			 if (strcmp(argv[i], "<") == 0)
+			 {
+				 incount++;
+			 }
+			 else if (strcmp(argv[i], ">") == 0)
+			 {
+				 outcount++;
+			 }
+			 if (incount > 1 || outcount > 1)
+			 {
+				 perror("You can't have multiple of the same type of redirect.\n");
+				 _exit(EXIT_FAILURE);
+			 }
+		 }
+	 }
+     
+     
+	 
 	 
 	 int i;
 	 for (i=0; i < count; i++)
@@ -196,7 +212,7 @@ void handle_redir(int count, char *argv[])
 
 			 if (fileId < 0)
 			 {
-				 printf("error creating file\n");
+				 perror("Error opening file.");
 				 exit(EXIT_FAILURE);
 			 }
 			 dup2(fileId, 0);      /* copy fileID to stdin */
@@ -210,8 +226,8 @@ void handle_redir(int count, char *argv[])
 			 
 			 if (fileId < 0)
 			 {
-				 printf("error creating x.lis\n");
-				 exit(EXIT_FAILURE);
+				 perror("Error creating file");
+				 _exit(EXIT_FAILURE);
 			 }
 			 dup2(fileId, 1);      /* copy fileID to stdout */
 			 close(fileId);
