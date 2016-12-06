@@ -115,7 +115,7 @@ int main(void)
                     if (wait(&status) == -1)//&status
                         perror("Shell Program error");
                     else
-                        printf("Child returned status: %d\n",status);
+                        //printf("Child returned status: %d\n",status);
                     break;
             } /* end of the switch */
         }
@@ -192,12 +192,11 @@ void handle_redir(int count, char *argv[])
 		 {
 			 //argv[i - 1];
 			 int fileId;
-
-			 fileId = open(argv[fd_out + 1], O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR, S_IWUSR);
+			 fileId = open(argv[i + 1], O_RDONLY);
 
 			 if (fileId < 0)
 			 {
-				 printf("error creating x.lis\n");
+				 printf("error creating file\n");
 				 exit(EXIT_FAILURE);
 			 }
 			 dup2(fileId, 0);      /* copy fileID to stdin */
